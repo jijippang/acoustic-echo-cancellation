@@ -4,7 +4,7 @@
 
 
 
-# Constants
+# Variables
 CLEAN=true
 
 
