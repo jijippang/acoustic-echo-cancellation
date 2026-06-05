@@ -13,7 +13,7 @@ class AEC
 
     private:
         std::uint16_t x{};
-}
+};
 
 
 
