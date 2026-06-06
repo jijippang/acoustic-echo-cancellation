@@ -51,7 +51,8 @@ include(FetchContent)
 FetchContent_Declare(
     googletest
     GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG 54915d462bb64e9b2bd1a3f0e70c00e6f5d817fb # v1.17.0 
+    GIT_TAG v1.17.0
+    GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(googletest)
 # Allows ctest to be used
@@ -62,7 +63,8 @@ enable_testing()
 FetchContent_Declare(
     AudioFile
     GIT_REPOSITORY https://github.com/adamstark/AudioFile.git
-    GIT_TAG 4554279566c19602a14868b58551f23fe5c5fb53 # v1.1.4 
+    GIT_TAG 1.1.4
+    GIT_SHALLOW TRUE
     SOURCE_SUBDIR "prevent_cmake_execution"
 )
 FetchContent_MakeAvailable(AudioFile)
@@ -72,15 +74,25 @@ target_include_directories(AudioFile::AudioFile INTERFACE ${audiofile_SOURCE_DIR
 
 # Fetch and configure spdlog
 FetchContent_Declare(
-    spdlog_header_only
+    spdlog
     GIT_REPOSITORY https://github.com/gabime/spdlog.git
-    GIT_TAG 79524ddd08a4ec981b7fea76afd08ee05f83755d # v1.17.0 
+    GIT_TAG v1.17.0
+    GIT_SHALLOW TRUE
     SOURCE_SUBDIR "prevent_cmake_execution"
 )
-FetchContent_MakeAvailable(spdlog_header_only)
+FetchContent_MakeAvailable(spdlog)
 add_library(spdlog::spdlog INTERFACE IMPORTED)
-target_include_directories(spdlog::spdlog INTERFACE "${spdlog_header_only_SOURCE_DIR}/include")
+target_include_directories(spdlog::spdlog INTERFACE "${spdlog_SOURCE_DIR}/include")
 
+
+# Fetch and configure Eigen
+FetchContent_Declare(
+    eigen
+    GIT_REPOSITORY https://gitlab.com/libeigen/eigen.git
+    GIT_TAG 5.0.1
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(eigen)
 
 
 

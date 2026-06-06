@@ -27,7 +27,7 @@ int main()
 
     // Create and initialize a logger
     auto logger = std::make_shared<spdlog::logger>("multi_logger", spdlog::sinks_init_list{console_sink, file_sink});
-    // logger->set_level(spdlog::level::debug);
+    logger->set_level(spdlog::level::trace);
     spdlog::register_logger(logger);
     spdlog::set_default_logger(logger);
     spdlog::flush_on(spdlog::level::critical);

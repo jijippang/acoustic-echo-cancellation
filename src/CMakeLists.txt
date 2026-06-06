@@ -16,5 +16,6 @@ target_sources(aec_lib
             ${HEADERS_DIR}/nlms.hpp
 )
 
-target_link_libraries(aec_lib PUBLIC AudioFile::AudioFile spdlog::spdlog)
+target_link_libraries(aec_lib PUBLIC AudioFile::AudioFile spdlog::spdlog Eigen3::Eigen)
+
 
