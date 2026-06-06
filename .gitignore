@@ -4,4 +4,11 @@
 build/
 
 
+# Logs
+logs/
+
+
+# clangd
+.cache/
+
 

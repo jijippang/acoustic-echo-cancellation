@@ -9,6 +9,8 @@ project(
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+# For clangd
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 
@@ -61,12 +63,25 @@ FetchContent_Declare(
     AudioFile
     GIT_REPOSITORY https://github.com/adamstark/AudioFile.git
     GIT_TAG 4554279566c19602a14868b58551f23fe5c5fb53 # v1.1.4 
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
+    SOURCE_SUBDIR "prevent_cmake_execution"
 )
 FetchContent_MakeAvailable(AudioFile)
 add_library(AudioFile::AudioFile INTERFACE IMPORTED)
 target_include_directories(AudioFile::AudioFile INTERFACE ${audiofile_SOURCE_DIR})
+
+
+# Fetch and configure spdlog
+FetchContent_Declare(
+    spdlog_header_only
+    GIT_REPOSITORY https://github.com/gabime/spdlog.git
+    GIT_TAG 79524ddd08a4ec981b7fea76afd08ee05f83755d # v1.17.0 
+    SOURCE_SUBDIR "prevent_cmake_execution"
+)
+FetchContent_MakeAvailable(spdlog_header_only)
+add_library(spdlog::spdlog INTERFACE IMPORTED)
+target_include_directories(spdlog::spdlog INTERFACE "${spdlog_header_only_SOURCE_DIR}/include")
+
+
 
 
 
