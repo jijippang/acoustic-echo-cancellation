@@ -14,6 +14,7 @@ target_sources(aec_lib
         FILES
             ${HEADERS_DIR}/aec.hpp
             ${HEADERS_DIR}/nlms.hpp
+            ${HEADERS_DIR}/sliding_window.hpp
 )
 
 target_link_libraries(aec_lib PUBLIC AudioFile::AudioFile spdlog::spdlog Eigen3::Eigen)

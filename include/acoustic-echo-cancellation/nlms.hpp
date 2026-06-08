@@ -1,8 +1,10 @@
 
 #include <cstdint>
-#include <vector>
+#include <memory>
 
 #include "Eigen/Dense"
+#include "spdlog/spdlog.h"
+#include "sliding_window.hpp"
 
 
 
@@ -13,25 +15,27 @@ namespace nlms
 class Nlms
 {
     public:
-        Nlms(
-            std::size_t order, 
-            std::size_t max_iter_cnt = 100
+        explicit Nlms(
+            const std::shared_ptr<spdlog::logger>& logger, 
+            std::size_t order,
+            double step_size,
+            double regularization
         );
 
-        void run(const Eigen::VectorXd& input_samples);
-        void step(double input_sample);
+        void run(const std::vector<double>& input_signal, const std::vector<double>& desired_signal);
+        void step(double input_sample, double desired_sample);
 
 
     private:
-        double error_{};
-        double step_size_{};
-        std::size_t order_{};
-        std::size_t iter_cnt_{};
-        std::size_t max_iter_cnt_{};
-        std::vector<double> weights_;
-
-
         void reset();
+        double calculate_power(const Eigen::VectorXd& signal);
+
+
+        std::shared_ptr<spdlog::logger> logger_{};
+        sliding_window::SlidingWindow<double> input_;
+        Eigen::VectorXd weights_;
+        double step_size_{};
+        double regularization_{};
 };
 
 

@@ -40,8 +40,6 @@ int main()
     const std::string nearend_out_filepath{"datasets/nearend_mic_fileid_0.wav"};
     const std::string nearend_in_filepath{"datasets/nearend_speech_fileid_0.wav"};
 
-
-
     aec::Aec aec{logger, farend_in_filepath, nearend_in_filepath};
     aec.run();
 }

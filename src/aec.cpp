@@ -27,10 +27,7 @@ namespace aec
     {
         logger_->info("Running AEC algorithm");
 
-        // for (const auto& sample : farend_in_audiofile_.samples[0])
-        // {
-        //     logger_->trace(sample);
-        // }
+        nlms_.run(farend_in_audiofile_.samples[0], nearend_in_audiofile_.samples[0]);
     }
 
 
